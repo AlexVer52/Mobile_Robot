@@ -1,0 +1,47 @@
+<robot name="mobile_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:property name="block_length" value="0.4"/>
+    <xacro:property name="block_width" value="0.2"/>
+    <xacro:property name="block_height" value="0.2"/>
+    <xacro:property name="wheel_radius" value="0.08"/>
+    <xacro:property name="wheel_width" value="0.04"/>
+
+    <link name="base_link">
+      <visual>
+        <geometry>
+          <box size="${block_length} ${block_width} ${block_height}"/>
+        </geometry>
+      </visual>
+      <collision>
+        <geometry>
+          <box size="${block_length} ${block_width} ${block_height}"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <xacro:macro name="wheel" params="name parent x y z">
+      <link name="${name}_wheel_link">
+        <visual>
+          <origin rpy="1.5708 0 0"/>
+          <geometry>
+            <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+          </geometry>
+        </visual>
+        <collision>
+          <origin rpy="1.5708 0 0"/>
+          <geometry>
+            <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+          </geometry>
+        </collision>
+      </link>
+
+      <joint name="${name}_wheel_joint" type="continuous">
+        <parent link="${parent}"/>
+        <child link="${name}_wheel_link"/>
+        <origin xyz="${x} ${y} ${z}" rpy="0 0 0"/>
+        <axis xyz="0 1 0"/>
+      </joint>
+    </xacro:macro>
+
+    <xacro:wheel name="left" parent="base_link" x="0" y="${block_width/2 + wheel_width/2}" z="-${block_height/4}"/>
+    <xacro:wheel name="right" parent="base_link" x="0" y="${-block_width/2 - wheel_width/2}" z="-${block_height/4}"/>
+</robot>
