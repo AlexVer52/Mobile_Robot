@@ -7,6 +7,8 @@
     <xacro:property name="center_wheel_radius" value="0.04"/>
     <xacro:property name="center_wheel_width" value="0.02"/>
 
+    <link name="base_footprint"/>
+
     <link name="base_link">
       <visual>
         <geometry>
@@ -44,7 +46,13 @@
       </joint>
     </xacro:macro>
 
-    <xacro:wheel name="left" parent="base_link" x="${block_length/4}" y="${block_width/2 + main_wheel_width/2}" z="-${block_height/4}" wheel_radius="${main_wheel_radius}" wheel_width="${main_wheel_width}"/>
-    <xacro:wheel name="right" parent="base_link" x="${block_length/4}" y="${-block_width/2 - main_wheel_width/2}" z="-${block_height/4}" wheel_radius="${main_wheel_radius}" wheel_width="${main_wheel_width}"/>
+    <joint name="base_footprint_joint" type="fixed">
+      <parent link="base_footprint"/>
+      <child link="base_link"/>
+      <origin xyz="0 0 ${block_height/2 + center_wheel_radius}" rpy="0 0 0"/>
+    </joint>
+
+    <xacro:wheel name="left" parent="base_link" x="${block_length/4}" y="${block_width/2 + main_wheel_width/2}" z="${-block_height/2 + (main_wheel_radius-center_wheel_radius)}" wheel_radius="${main_wheel_radius}" wheel_width="${main_wheel_width}"/>
+    <xacro:wheel name="right" parent="base_link" x="${block_length/4}" y="${-block_width/2 - main_wheel_width/2}" z="${-block_height/2 + (main_wheel_radius-center_wheel_radius)}" wheel_radius="${main_wheel_radius}" wheel_width="${main_wheel_width}"/>
     <xacro:wheel name="center" parent="base_link" x="-${block_length/4}" y="0" z="-${block_height/2}" wheel_radius="${center_wheel_radius}" wheel_width="${center_wheel_width}"/>
 </robot>
