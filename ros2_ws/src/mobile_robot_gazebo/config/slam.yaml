@@ -1,9 +1,9 @@
 slam_toolbox:
   ros__parameters:
     use_sim_time: true
-    odom_frame: mobile_robot/odom
+    odom_frame: odom
     map_frame: map
-    base_frame: mobile_robot/base_footprint
+    base_frame: base_footprint
     scan_topic: /scan
     mode: mapping
     max_laser_range: 8.0
