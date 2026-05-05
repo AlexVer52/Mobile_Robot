@@ -24,7 +24,7 @@
       </inertial>
     </xacro:macro>
 
-    <xacro:macro name="wheel_inertia" params="mass radius width">
+    <xacro:macro name="cylinder_inertia" params="mass radius width">
       <inertial>
         <mass value="${mass}"/>
         <inertia
@@ -34,6 +34,13 @@
           iyy="${mass * radius*radius / 2.0}"
           iyz="0.0"
           izz="${mass * (3.0*radius*radius + width*width) / 12.0}"/>
+      </inertial>
+    </xacro:macro>
+
+    <xacro:macro name="sphere_inertia" params="mass radius">
+      <inertial>
+        <mass value="${mass}"/>
+        <inertia ixx="${(2/5) * mass * (radius*radius)}" ixy="0.0" ixz="0.0" iyy="${(2/5) * mass * (radius*radius)}" iyz="0.0" izz="${(2/5) * mass * (radius*radius)}"/>
       </inertial>
     </xacro:macro>
 
@@ -53,9 +60,46 @@
       </collision>
     </link>
 
+    <link name="lidar_link">
+      <visual>
+        <origin rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.04" length="0.04"/>
+        </geometry>
+        <material name="red">
+          <color rgba="1 0 0 1"/>
+        </material>
+      </visual>
+    </link>
+
+    <link name="camera_link">
+      <visual>
+        <geometry>
+          <box size="0.04 0.04 0.03"/>
+        </geometry>
+        <material name="green">
+          <color rgba="0 1 0 1"/>
+        </material>
+      </visual>
+    </link>
+
+    <link name="imu_link"/>
+
+    <link name="front_caster">
+      <xacro:sphere_inertia mass="${base_mass}" radius="${center_wheel_radius}"/>
+      <visual>
+        <geometry>
+          <sphere radius="${center_wheel_radius}"/>
+        </geometry>
+        <material name="Cyan">
+          <color rgba="0 1.0 1.0 1.0"/>
+        </material>
+      </visual>
+    </link>
+
     <xacro:macro name="wheel" params="name parent x y z wheel_radius wheel_width wheel_mass">
       <link name="${name}_wheel_link">
-        <xacro:wheel_inertia mass="${wheel_mass}" radius="${wheel_radius}" width="${wheel_width}"/>
+        <xacro:cylinder_inertia mass="${wheel_mass}" radius="${wheel_radius}" width="${wheel_width}"/>
         <visual>
           <origin rpy="1.5708 0 0"/>
           <geometry>
@@ -84,9 +128,32 @@
       <origin xyz="0 0 ${block_height/2 + ground_clearance}" rpy="0 0 0"/>
     </joint>
 
+    <joint name="lidar_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="lidar_link"/>
+      <origin xyz="${block_length/2 - 0.04} 0 ${block_height/2 + 0.02}" rpy="0 0 0"/>
+    </joint>
+
+    <joint name="camera_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="camera_link"/>
+      <origin xyz="${block_length/2 + 0.02} 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <joint name="imu_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="imu_link"/>
+      <origin xyz="0 0 0.08" rpy="0 0 0"/>
+    </joint>
+
     <xacro:wheel name="left" parent="base_link" x="-${block_length/4}" y="${block_width/2 + main_wheel_width/2}" z="${main_wheel_radius - block_height/2 - ground_clearance}" wheel_radius="${main_wheel_radius}" wheel_width="${main_wheel_width}" wheel_mass="${main_wheel_mass}"/>
     <xacro:wheel name="right" parent="base_link" x="-${block_length/4}" y="${-block_width/2 - main_wheel_width/2}" z="${main_wheel_radius - block_height/2 - ground_clearance}" wheel_radius="${main_wheel_radius}" wheel_width="${main_wheel_width}" wheel_mass="${main_wheel_mass}"/>
-    <xacro:wheel name="center" parent="base_link" x="${block_length/4}" y="0" z="${center_wheel_radius - block_height/2 - ground_clearance}" wheel_radius="${center_wheel_radius}" wheel_width="${center_wheel_width}" wheel_mass="${center_wheel_mass}"/>
+
+    <joint name="caster_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="front_caster"/>
+      <origin xyz="${block_length/4} 0.0 ${center_wheel_radius - block_height/2 - ground_clearance}" rpy="0 0 0"/>
+    </joint>
 
     <gazebo reference="base_link">
       <material>Gazebo/Blue</material>
@@ -104,10 +171,63 @@
       <mu2>1.0</mu2>
     </gazebo>
 
-    <gazebo reference="center_wheel_link">
+    <gazebo reference="front_caster">
       <material>Gazebo/Grey</material>
-      <mu1>0.2</mu1>
-      <mu2>0.2</mu2>
+      <mu1>0.02</mu1>
+      <mu2>0.02</mu2>
+    </gazebo>
+
+    <gazebo reference="lidar_link">
+      <sensor name="lidar" type="gpu_lidar">
+        <topic>/scan</topic>
+        <update_rate>10</update_rate>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>360</samples>
+              <resolution>1</resolution>
+              <min_angle>-3.14159</min_angle>
+              <max_angle>3.14159</max_angle>
+            </horizontal>
+          </scan>
+          <range>
+            <min>0.12</min>
+            <max>8.0</max>
+            <resolution>0.01</resolution>
+          </range>
+        </ray>
+        <always_on>true</always_on>
+        <visualize>true</visualize>
+      </sensor>
+    </gazebo>
+
+    <gazebo reference="camera_link">
+      <sensor name="camera" type="camera">
+        <topic>/camera/image_raw</topic>
+        <update_rate>30</update_rate>
+        <camera>
+          <horizontal_fov>1.047</horizontal_fov>
+          <image>
+            <width>640</width>
+            <height>480</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.05</near>
+            <far>20.0</far>
+          </clip>
+        </camera>
+        <always_on>true</always_on>
+        <visualize>true</visualize>
+      </sensor>
+    </gazebo>
+
+    <gazebo reference="imu_link">
+      <sensor name="imu" type="imu">
+        <topic>/imu</topic>
+        <update_rate>100</update_rate>
+        <always_on>true</always_on>
+      </sensor>
     </gazebo>
 
     <gazebo>

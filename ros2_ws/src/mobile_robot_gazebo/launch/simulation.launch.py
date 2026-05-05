@@ -56,16 +56,50 @@ def generate_launch_description():
         output="screen",
     )
 
-    cmd_vel_bridge = Node(
-        package="ros_gz_bridge",
-        executable="parameter_bridge",
+    ## Switch to YAML file
+    #bridge = Node(
+    #    package="ros_gz_bridge",
+    #    executable="parameter_bridge",
+    #    arguments=[
+    #    "/model/mobile_robot/cmd_vel@geometry_msgs/msg/Twist@gz.msgs.Twist",
+    #    "/camera/image_raw@sensor_msgs/msg/Image@gz.msgs.Image",
+    #    "/camera/camera_info@sensor_msgs/msg/CameraInfo@gz.msgs.CameraInfo",
+    #    "/imu@sensor_msgs/msg/Imu@gz.msgs.IMU",
+    #    "/model/mobile_robot/odometry@nav_msgs/msg/Odometry@gz.msgs.Odometry",
+    #    "/scan@sensor_msgs/msg/LaserScan@gz.msgs.LaserScan",
+    #    "/model/mobile_robot/tf@tf2_msgs/msg/TFMessage@gz.msgs.Pose_V",
+    #    ],
+    #    remappings=[
+    #        ("/model/mobile_robot/tf", "/tf"),
+    #        ("/model/mobile_robot/odometry", "/odom"),
+    #    ]
+    #)
+
+    ## Add a static transform between the LiDAR and the robot basefootprint
+    lidar_tf = Node(
+        package="tf2_ros",
+        executable="static_transform_publisher",
         arguments=[
-        "/model/mobile_robot/cmd_vel@geometry_msgs/msg/Twist@gz.msgs.Twist",
-    ],)
+            "0.22", "0.05", "0.10",  # x, y, z
+            "0.0", "0.0", "0.0",  # roll, pitch, yaw
+            "mobile_robot/base_footprint",
+            "mobile_robot/base_footprint/lidar",
+        ],
+    )
+
+    ##rviz_node = Node(
+    ##    package='rviz2',
+    ##    executable='rviz2',
+    ##    name='rviz2',
+    ##    output='screen',
+    ##    arguments=['-d', LaunchConfiguration('rvizconfig')],
+    ##)
 
     return LaunchDescription([
         gazebo,
         robot_state_publisher,
         spawn_robot,
-        cmd_vel_bridge,
+        #bridge,
+        lidar_tf,
+        ##rviz_node,
     ])

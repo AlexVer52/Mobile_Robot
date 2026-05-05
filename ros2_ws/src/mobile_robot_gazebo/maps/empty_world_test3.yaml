@@ -1,0 +1,7 @@
+image: empty_world_test3.pgm
+mode: trinary
+resolution: 0.050
+origin: [-0.152, -0.571, 0]
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.196

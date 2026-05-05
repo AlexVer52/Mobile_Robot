@@ -1,0 +1,1 @@
+/home/averot/mobile_robot/build/mobile_robot_description/ament_cmake_environment_hooks/local_setup.zsh
