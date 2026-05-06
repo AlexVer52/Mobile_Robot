@@ -315,8 +315,8 @@ message(STATUS "Execute custom install script")
 
 # begin of custom install code
 
-# install(DIRECTORY "launch" "worlds" "DESTINATION" "share/mobile_robot_gazebo")
-ament_cmake_symlink_install_directory("/home/averot/mobile_robot/ros2_ws/src/mobile_robot_gazebo" DIRECTORY "launch" "worlds" "DESTINATION" "share/mobile_robot_gazebo")
+# install(DIRECTORY "launch" "worlds" "config" "maps" "rviz" "DESTINATION" "share/mobile_robot_gazebo")
+ament_cmake_symlink_install_directory("/home/averot/mobile_robot/ros2_ws/src/mobile_robot_gazebo" DIRECTORY "launch" "worlds" "config" "maps" "rviz" "DESTINATION" "share/mobile_robot_gazebo")
 
 # install(FILES "/home/averot/mobile_robot/build/mobile_robot_gazebo/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/mobile_robot_gazebo" "DESTINATION" "share/ament_index/resource_index/package_run_dependencies")
 ament_cmake_symlink_install_files("/home/averot/mobile_robot/ros2_ws/src/mobile_robot_gazebo" FILES "/home/averot/mobile_robot/build/mobile_robot_gazebo/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/mobile_robot_gazebo" "DESTINATION" "share/ament_index/resource_index/package_run_dependencies")

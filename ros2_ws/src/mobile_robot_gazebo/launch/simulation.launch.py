@@ -34,6 +34,18 @@ def generate_launch_description():
         "empty.world",
     ])
 
+    slam_path = PathJoinSubstitution([
+        FindPackageShare("mobile_robot_gazebo"),
+        "config",
+        "slam.yaml",
+    ])
+
+    rviz_path = PathJoinSubstitution([
+        FindPackageShare("mobile_robot_gazebo"),
+        "rviz",
+        "nav.rviz",
+    ])
+
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             PathJoinSubstitution([
@@ -44,6 +56,7 @@ def generate_launch_description():
         ]),
         launch_arguments={
             "gz_args": world_path,
+            "use_sim_time": "true",
         }.items(),
     )
 
@@ -78,10 +91,37 @@ def generate_launch_description():
         parameters=[os.path.join(pkg_share, 'config', 'ekf.yaml'), {'use_sim_time': True}]
     )
 
+    ## Automatiser le lancement de rivz
+    rviz = Node(
+        package="rviz2",
+        executable="rviz2",
+        name="rviz2",
+        output="screen",
+        arguments=['-d', rviz_path],
+        parameters=[{"use_sim_time": True}],
+    )
+
+    ## Automatiser le lancement de SLAM
+    slam = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            PathJoinSubstitution([
+                FindPackageShare("slam_toolbox"),
+                "launch",
+                "online_async_launch.py",
+            ])
+        ]),
+        launch_arguments={
+            "slam_params_file": slam_path,
+            "use_sim_time": "true",
+        }.items(),
+    )
+
     return LaunchDescription([
         gazebo,
         robot_state_publisher,
         spawn_robot,
         ros_gz_bridge,
         ekf_node,
+        rviz,
+        slam,
     ])
