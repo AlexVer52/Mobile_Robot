@@ -1,4 +1,5 @@
 /home/averot/mobile_robot/install/mobile_robot_gazebo/share/mobile_robot_gazebo/launch/__pycache__/simulation.launch.cpython-312.pyc
+/home/averot/mobile_robot/install/mobile_robot_gazebo/share/mobile_robot_gazebo/launch/frontier_exploration.launch.py
 /home/averot/mobile_robot/install/mobile_robot_gazebo/share/mobile_robot_gazebo/launch/simulation.launch.py
 /home/averot/mobile_robot/install/mobile_robot_gazebo/share/mobile_robot_gazebo/worlds/empty.world
 /home/averot/mobile_robot/install/mobile_robot_gazebo/share/mobile_robot_gazebo/config/bridge.yaml
@@ -14,6 +15,7 @@
 /home/averot/mobile_robot/install/mobile_robot_gazebo/share/mobile_robot_gazebo/maps/obstacles_world1.pgm
 /home/averot/mobile_robot/install/mobile_robot_gazebo/share/mobile_robot_gazebo/maps/obstacles_world1.yaml
 /home/averot/mobile_robot/install/mobile_robot_gazebo/share/mobile_robot_gazebo/rviz/nav.rviz
+/home/averot/mobile_robot/install/mobile_robot_gazebo/lib/mobile_robot_gazebo/frontier_explorer.py
 /home/averot/mobile_robot/install/mobile_robot_gazebo/share/ament_index/resource_index/package_run_dependencies/mobile_robot_gazebo
 /home/averot/mobile_robot/install/mobile_robot_gazebo/share/ament_index/resource_index/parent_prefix_path/mobile_robot_gazebo
 /home/averot/mobile_robot/install/mobile_robot_gazebo/share/mobile_robot_gazebo/environment/ament_prefix_path.sh

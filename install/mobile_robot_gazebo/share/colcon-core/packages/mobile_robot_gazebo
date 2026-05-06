@@ -1,1 +1,1 @@
-mobile_robot_description:robot_localization:robot_state_publisher:ros_gz_bridge:ros_gz_sim:xacro
+geometry_msgs:mobile_robot_description:nav2_msgs:nav_msgs:rclpy:robot_localization:robot_state_publisher:ros_gz_bridge:ros_gz_sim:xacro

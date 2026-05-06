@@ -1,0 +1,50 @@
+[0.133s] Invoking command in '/home/averot/mobile_robot/build/mobile_robot_gazebo': CMAKE_PREFIX_PATH=/home/averot/mobile_robot/install/mobile_robot_description:/home/averot/mobile_robot/ros2_ws/install/mobile_robot_gazebo:/home/averot/mobile_robot/ros2_ws/install/mobile_robot_description:/home/averot/mobile_robot/install/mobile_robot_gazebo:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy /usr/bin/cmake --build /home/averot/mobile_robot/build/mobile_robot_gazebo -- -j8 -l8
+[0.212s] -- Found ament_cmake: 2.5.6 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[0.607s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.669s] -- Found ament_lint_auto: 0.17.5 (/opt/ros/jazzy/share/ament_lint_auto/cmake)
+[0.868s] -- Added test 'flake8' to check Python code syntax and style conventions
+[0.868s] -- Configured 'flake8' exclude dirs and/or files: 
+[0.871s] -- Added test 'lint_cmake' to check CMake code style
+[0.872s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[0.876s] -- Added test 'xmllint' to check XML markup files
+[0.883s] -- Configuring done (0.7s)
+[0.926s] -- Generating done (0.0s)
+[0.944s] -- Build files have been written to: /home/averot/mobile_robot/build/mobile_robot_gazebo
+[0.993s] Invoked command in '/home/averot/mobile_robot/build/mobile_robot_gazebo' returned '0': CMAKE_PREFIX_PATH=/home/averot/mobile_robot/install/mobile_robot_description:/home/averot/mobile_robot/ros2_ws/install/mobile_robot_gazebo:/home/averot/mobile_robot/ros2_ws/install/mobile_robot_description:/home/averot/mobile_robot/install/mobile_robot_gazebo:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy /usr/bin/cmake --build /home/averot/mobile_robot/build/mobile_robot_gazebo -- -j8 -l8
+[0.996s] Invoking command in '/home/averot/mobile_robot/build/mobile_robot_gazebo': CMAKE_PREFIX_PATH=/home/averot/mobile_robot/install/mobile_robot_description:/home/averot/mobile_robot/ros2_ws/install/mobile_robot_gazebo:/home/averot/mobile_robot/ros2_ws/install/mobile_robot_description:/home/averot/mobile_robot/install/mobile_robot_gazebo:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy /usr/bin/cmake --install /home/averot/mobile_robot/build/mobile_robot_gazebo
+[1.015s] -- Install configuration: ""
+[1.017s] -- Execute custom install script
+[1.019s] -- Up-to-date symlink: /home/averot/mobile_robot/install/mobile_robot_gazebo/share/mobile_robot_gazebo/launch/__pycache__/simulation.launch.cpython-312.pyc
+[1.020s] -- Symlinking: /home/averot/mobile_robot/install/mobile_robot_gazebo/share/mobile_robot_gazebo/launch/frontier_exploration.launch.py
+[1.046s] -- Up-to-date symlink: /home/averot/mobile_robot/install/mobile_robot_gazebo/share/mobile_robot_gazebo/launch/simulation.launch.py
+[1.048s] -- Up-to-date symlink: /home/averot/mobile_robot/install/mobile_robot_gazebo/share/mobile_robot_gazebo/worlds/empty.world
+[1.049s] -- Up-to-date symlink: /home/averot/mobile_robot/install/mobile_robot_gazebo/share/mobile_robot_gazebo/config/bridge.yaml
+[1.050s] -- Up-to-date symlink: /home/averot/mobile_robot/install/mobile_robot_gazebo/share/mobile_robot_gazebo/config/ekf.yaml
+[1.051s] -- Up-to-date symlink: /home/averot/mobile_robot/install/mobile_robot_gazebo/share/mobile_robot_gazebo/config/nav.yaml
+[1.053s] -- Up-to-date symlink: /home/averot/mobile_robot/install/mobile_robot_gazebo/share/mobile_robot_gazebo/config/slam.yaml
+[1.054s] -- Up-to-date symlink: /home/averot/mobile_robot/install/mobile_robot_gazebo/share/mobile_robot_gazebo/maps/empty_world_test.pgm
+[1.055s] -- Up-to-date symlink: /home/averot/mobile_robot/install/mobile_robot_gazebo/share/mobile_robot_gazebo/maps/empty_world_test.yaml
+[1.056s] -- Up-to-date symlink: /home/averot/mobile_robot/install/mobile_robot_gazebo/share/mobile_robot_gazebo/maps/empty_world_test2.pgm
+[1.057s] -- Up-to-date symlink: /home/averot/mobile_robot/install/mobile_robot_gazebo/share/mobile_robot_gazebo/maps/empty_world_test2.yaml
+[1.058s] -- Up-to-date symlink: /home/averot/mobile_robot/install/mobile_robot_gazebo/share/mobile_robot_gazebo/maps/empty_world_test3.pgm
+[1.066s] -- Up-to-date symlink: /home/averot/mobile_robot/install/mobile_robot_gazebo/share/mobile_robot_gazebo/maps/empty_world_test3.yaml
+[1.068s] -- Up-to-date symlink: /home/averot/mobile_robot/install/mobile_robot_gazebo/share/mobile_robot_gazebo/maps/obstacles_world1.pgm
+[1.071s] -- Up-to-date symlink: /home/averot/mobile_robot/install/mobile_robot_gazebo/share/mobile_robot_gazebo/maps/obstacles_world1.yaml
+[1.072s] -- Up-to-date symlink: /home/averot/mobile_robot/install/mobile_robot_gazebo/share/mobile_robot_gazebo/rviz/nav.rviz
+[1.075s] -- Symlinking: /home/averot/mobile_robot/install/mobile_robot_gazebo/lib/mobile_robot_gazebo/frontier_explorer.py
+[1.106s] -- Up-to-date symlink: /home/averot/mobile_robot/install/mobile_robot_gazebo/share/ament_index/resource_index/package_run_dependencies/mobile_robot_gazebo
+[1.121s] -- Up-to-date symlink: /home/averot/mobile_robot/install/mobile_robot_gazebo/share/ament_index/resource_index/parent_prefix_path/mobile_robot_gazebo
+[1.121s] -- Up-to-date symlink: /home/averot/mobile_robot/install/mobile_robot_gazebo/share/mobile_robot_gazebo/environment/ament_prefix_path.sh
+[1.123s] -- Up-to-date symlink: /home/averot/mobile_robot/install/mobile_robot_gazebo/share/mobile_robot_gazebo/environment/ament_prefix_path.dsv
+[1.124s] -- Up-to-date symlink: /home/averot/mobile_robot/install/mobile_robot_gazebo/share/mobile_robot_gazebo/environment/path.sh
+[1.125s] -- Up-to-date symlink: /home/averot/mobile_robot/install/mobile_robot_gazebo/share/mobile_robot_gazebo/environment/path.dsv
+[1.126s] -- Up-to-date symlink: /home/averot/mobile_robot/install/mobile_robot_gazebo/share/mobile_robot_gazebo/local_setup.bash
+[1.126s] -- Up-to-date symlink: /home/averot/mobile_robot/install/mobile_robot_gazebo/share/mobile_robot_gazebo/local_setup.sh
+[1.127s] -- Up-to-date symlink: /home/averot/mobile_robot/install/mobile_robot_gazebo/share/mobile_robot_gazebo/local_setup.zsh
+[1.128s] -- Up-to-date symlink: /home/averot/mobile_robot/install/mobile_robot_gazebo/share/mobile_robot_gazebo/local_setup.dsv
+[1.128s] -- Symlinking: /home/averot/mobile_robot/install/mobile_robot_gazebo/share/mobile_robot_gazebo/package.dsv
+[1.157s] -- Up-to-date symlink: /home/averot/mobile_robot/install/mobile_robot_gazebo/share/ament_index/resource_index/packages/mobile_robot_gazebo
+[1.158s] -- Up-to-date symlink: /home/averot/mobile_robot/install/mobile_robot_gazebo/share/mobile_robot_gazebo/cmake/mobile_robot_gazeboConfig.cmake
+[1.158s] -- Up-to-date symlink: /home/averot/mobile_robot/install/mobile_robot_gazebo/share/mobile_robot_gazebo/cmake/mobile_robot_gazeboConfig-version.cmake
+[1.158s] -- Up-to-date symlink: /home/averot/mobile_robot/install/mobile_robot_gazebo/share/mobile_robot_gazebo/package.xml
+[1.164s] Invoked command in '/home/averot/mobile_robot/build/mobile_robot_gazebo' returned '0': CMAKE_PREFIX_PATH=/home/averot/mobile_robot/install/mobile_robot_description:/home/averot/mobile_robot/ros2_ws/install/mobile_robot_gazebo:/home/averot/mobile_robot/ros2_ws/install/mobile_robot_description:/home/averot/mobile_robot/install/mobile_robot_gazebo:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy /usr/bin/cmake --install /home/averot/mobile_robot/build/mobile_robot_gazebo
