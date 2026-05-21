@@ -36,18 +36,6 @@ def generate_launch_description():
         world,
     ])
 
-    slam_path = PathJoinSubstitution([
-        FindPackageShare("mobile_robot_gazebo"),
-        "config",
-        "slam.yaml",
-    ])
-
-    nav_path = PathJoinSubstitution([
-        FindPackageShare("mobile_robot_gazebo"),
-        "config",
-        "nav.yaml",
-    ])
-
     rviz_path = PathJoinSubstitution([
         FindPackageShare("mobile_robot_gazebo"),
         "rviz",
@@ -109,35 +97,6 @@ def generate_launch_description():
         parameters=[{"use_sim_time": True}],
     )
 
-    ## Automatiser le lancement de SLAM
-    slam = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([
-            PathJoinSubstitution([
-                FindPackageShare("slam_toolbox"),
-                "launch",
-                "online_async_launch.py",
-            ])
-        ]),
-        launch_arguments={
-            "slam_params_file": slam_path,
-            "use_sim_time": "true",
-        }.items(),
-    )
-
-    nav2 = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([
-            PathJoinSubstitution([
-                FindPackageShare("nav2_bringup"),
-                "launch",
-                "navigation_launch.py",
-            ])
-        ]),
-        launch_arguments={
-            "params_file": nav_path,
-            "use_sim_time": "true",
-        }.items(),
-    )
-
     return LaunchDescription([
         DeclareLaunchArgument(
             "world",
@@ -150,6 +109,4 @@ def generate_launch_description():
         ros_gz_bridge,
         ekf_node,
         rviz,
-        slam,
-        nav2,
     ])

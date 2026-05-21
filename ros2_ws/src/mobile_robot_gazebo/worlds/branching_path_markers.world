@@ -1,0 +1,206 @@
+<sdf version="1.10">
+  <world name="branching_path_markers">
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"/>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+    <plugin filename="gz-sim8-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <plugin filename="gz-sim8-imu-system" name="gz::sim::systems::Imu"/>
+
+    <gravity>0 0 -9.81</gravity>
+
+    <light name="sun" type="directional">
+      <pose>8 0 10 0 0 0</pose>
+      <diffuse>0.9 0.9 0.86 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <direction>-0.6 0.25 -0.75</direction>
+    </light>
+
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>24 12</size>
+            </plane>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>24 12</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.78 0.78 0.74 1</ambient>
+            <diffuse>0.78 0.78 0.74 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="outer_walls">
+      <static>true</static>
+      <link name="north_wall">
+        <pose>8.0 4.2 0.5 0 0 0</pose>
+        <collision name="collision"><geometry><box><size>17.5 0.12 1.0</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>17.5 0.12 1.0</size></box></geometry><material><ambient>0.34 0.34 0.34 1</ambient><diffuse>0.34 0.34 0.34 1</diffuse></material></visual>
+      </link>
+      <link name="south_wall">
+        <pose>8.0 -4.2 0.5 0 0 0</pose>
+        <collision name="collision"><geometry><box><size>17.5 0.12 1.0</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>17.5 0.12 1.0</size></box></geometry><material><ambient>0.34 0.34 0.34 1</ambient><diffuse>0.34 0.34 0.34 1</diffuse></material></visual>
+      </link>
+      <link name="west_wall">
+        <pose>-0.7 0 0.5 0 0 0</pose>
+        <collision name="collision"><geometry><box><size>0.12 8.4 1.0</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>0.12 8.4 1.0</size></box></geometry><material><ambient>0.34 0.34 0.34 1</ambient><diffuse>0.34 0.34 0.34 1</diffuse></material></visual>
+      </link>
+      <link name="east_wall">
+        <pose>16.7 0 0.5 0 0 0</pose>
+        <collision name="collision"><geometry><box><size>0.12 8.4 1.0</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>0.12 8.4 1.0</size></box></geometry><material><ambient>0.34 0.34 0.34 1</ambient><diffuse>0.34 0.34 0.34 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <model name="non_blocking_lane_guides">
+      <static>true</static>
+      <link name="start_center_line">
+        <pose>1.0 0 0.012 0 0 0</pose>
+        <visual name="visual"><geometry><box><size>1.4 0.05 0.02</size></box></geometry><material><ambient>0.55 0.55 0.55 1</ambient><diffuse>0.55 0.55 0.55 1</diffuse></material></visual>
+      </link>
+      <link name="decision_1_left_lane_hint">
+        <pose>2.7 2.2 0.012 0 0 0</pose>
+        <visual name="visual"><geometry><box><size>1.2 0.05 0.02</size></box></geometry><material><ambient>0.5 0.5 0.5 1</ambient><diffuse>0.5 0.5 0.5 1</diffuse></material></visual>
+      </link>
+      <link name="decision_1_straight_lane_hint">
+        <pose>2.7 0 0.012 0 0 0</pose>
+        <visual name="visual"><geometry><box><size>1.2 0.05 0.02</size></box></geometry><material><ambient>0.5 0.5 0.5 1</ambient><diffuse>0.5 0.5 0.5 1</diffuse></material></visual>
+      </link>
+      <link name="decision_1_right_lane_hint">
+        <pose>2.7 -2.2 0.012 0 0 0</pose>
+        <visual name="visual"><geometry><box><size>1.2 0.05 0.02</size></box></geometry><material><ambient>0.5 0.5 0.5 1</ambient><diffuse>0.5 0.5 0.5 1</diffuse></material></visual>
+      </link>
+      <link name="decision_2_left_lane_hint">
+        <pose>6.1 2.2 0.012 0 0 0</pose>
+        <visual name="visual"><geometry><box><size>1.2 0.05 0.02</size></box></geometry><material><ambient>0.5 0.5 0.5 1</ambient><diffuse>0.5 0.5 0.5 1</diffuse></material></visual>
+      </link>
+      <link name="decision_2_straight_lane_hint">
+        <pose>6.1 0 0.012 0 0 0</pose>
+        <visual name="visual"><geometry><box><size>1.2 0.05 0.02</size></box></geometry><material><ambient>0.5 0.5 0.5 1</ambient><diffuse>0.5 0.5 0.5 1</diffuse></material></visual>
+      </link>
+      <link name="decision_2_right_lane_hint">
+        <pose>6.1 -2.2 0.012 0 0 0</pose>
+        <visual name="visual"><geometry><box><size>1.2 0.05 0.02</size></box></geometry><material><ambient>0.5 0.5 0.5 1</ambient><diffuse>0.5 0.5 0.5 1</diffuse></material></visual>
+      </link>
+      <link name="decision_3_left_lane_hint">
+        <pose>9.5 2.2 0.012 0 0 0</pose>
+        <visual name="visual"><geometry><box><size>1.2 0.05 0.02</size></box></geometry><material><ambient>0.5 0.5 0.5 1</ambient><diffuse>0.5 0.5 0.5 1</diffuse></material></visual>
+      </link>
+      <link name="decision_3_straight_lane_hint">
+        <pose>9.5 0 0.012 0 0 0</pose>
+        <visual name="visual"><geometry><box><size>1.2 0.05 0.02</size></box></geometry><material><ambient>0.5 0.5 0.5 1</ambient><diffuse>0.5 0.5 0.5 1</diffuse></material></visual>
+      </link>
+      <link name="decision_3_right_lane_hint">
+        <pose>9.5 -2.2 0.012 0 0 0</pose>
+        <visual name="visual"><geometry><box><size>1.2 0.05 0.02</size></box></geometry><material><ambient>0.5 0.5 0.5 1</ambient><diffuse>0.5 0.5 0.5 1</diffuse></material></visual>
+      </link>
+      <link name="decision_4_left_lane_hint">
+        <pose>12.9 2.2 0.012 0 0 0</pose>
+        <visual name="visual"><geometry><box><size>1.2 0.05 0.02</size></box></geometry><material><ambient>0.5 0.5 0.5 1</ambient><diffuse>0.5 0.5 0.5 1</diffuse></material></visual>
+      </link>
+      <link name="decision_4_straight_lane_hint">
+        <pose>12.9 0 0.012 0 0 0</pose>
+        <visual name="visual"><geometry><box><size>1.2 0.05 0.02</size></box></geometry><material><ambient>0.5 0.5 0.5 1</ambient><diffuse>0.5 0.5 0.5 1</diffuse></material></visual>
+      </link>
+      <link name="decision_4_right_lane_hint">
+        <pose>12.9 -2.2 0.012 0 0 0</pose>
+        <visual name="visual"><geometry><box><size>1.2 0.05 0.02</size></box></geometry><material><ambient>0.5 0.5 0.5 1</ambient><diffuse>0.5 0.5 0.5 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <model name="decision_markers">
+      <static>true</static>
+      <link name="decision_1_left_blue_panel">
+        <pose>2.0 2.2 0.85 0 0 0</pose>
+        <visual name="visual"><geometry><box><size>0.08 0.75 0.75</size></box></geometry><material><ambient>0.05 0.25 1.0 1</ambient><diffuse>0.05 0.25 1.0 1</diffuse></material></visual>
+      </link>
+      <link name="decision_1_straight_green_panel">
+        <pose>2.0 0 0.85 0 0 0</pose>
+        <visual name="visual"><geometry><box><size>0.08 0.75 0.75</size></box></geometry><material><ambient>0.0 0.9 0.12 1</ambient><diffuse>0.0 0.9 0.12 1</diffuse></material></visual>
+      </link>
+      <link name="decision_1_right_red_panel">
+        <pose>2.0 -2.2 0.85 0 0 0</pose>
+        <visual name="visual"><geometry><box><size>0.08 0.75 0.75</size></box></geometry><material><ambient>0.95 0.05 0.05 1</ambient><diffuse>0.95 0.05 0.05 1</diffuse></material></visual>
+      </link>
+
+      <link name="decision_2_left_green_panel">
+        <pose>5.4 2.2 0.85 0 0 0</pose>
+        <visual name="visual"><geometry><box><size>0.08 0.75 0.75</size></box></geometry><material><ambient>0.0 0.9 0.12 1</ambient><diffuse>0.0 0.9 0.12 1</diffuse></material></visual>
+      </link>
+      <link name="decision_2_straight_red_panel">
+        <pose>5.4 0 0.85 0 0 0</pose>
+        <visual name="visual"><geometry><box><size>0.08 0.75 0.75</size></box></geometry><material><ambient>0.95 0.05 0.05 1</ambient><diffuse>0.95 0.05 0.05 1</diffuse></material></visual>
+      </link>
+      <link name="decision_2_right_yellow_panel">
+        <pose>5.4 -2.2 0.85 0 0 0</pose>
+        <visual name="visual"><geometry><box><size>0.08 0.75 0.75</size></box></geometry><material><ambient>1.0 0.75 0.03 1</ambient><diffuse>1.0 0.75 0.03 1</diffuse></material></visual>
+      </link>
+
+      <link name="decision_3_left_red_panel">
+        <pose>8.8 2.2 0.85 0 0 0</pose>
+        <visual name="visual"><geometry><box><size>0.08 0.75 0.75</size></box></geometry><material><ambient>0.95 0.05 0.05 1</ambient><diffuse>0.95 0.05 0.05 1</diffuse></material></visual>
+      </link>
+      <link name="decision_3_straight_blue_panel">
+        <pose>8.8 0 0.85 0 0 0</pose>
+        <visual name="visual"><geometry><box><size>0.08 0.75 0.75</size></box></geometry><material><ambient>0.05 0.25 1.0 1</ambient><diffuse>0.05 0.25 1.0 1</diffuse></material></visual>
+      </link>
+      <link name="decision_3_right_green_panel">
+        <pose>8.8 -2.2 0.85 0 0 0</pose>
+        <visual name="visual"><geometry><box><size>0.08 0.75 0.75</size></box></geometry><material><ambient>0.0 0.9 0.12 1</ambient><diffuse>0.0 0.9 0.12 1</diffuse></material></visual>
+      </link>
+
+      <link name="decision_4_left_yellow_panel">
+        <pose>12.2 2.2 0.85 0 0 0</pose>
+        <visual name="visual"><geometry><box><size>0.08 0.75 0.75</size></box></geometry><material><ambient>1.0 0.75 0.03 1</ambient><diffuse>1.0 0.75 0.03 1</diffuse></material></visual>
+      </link>
+      <link name="decision_4_straight_green_panel">
+        <pose>12.2 0 0.85 0 0 0</pose>
+        <visual name="visual"><geometry><box><size>0.08 0.75 0.75</size></box></geometry><material><ambient>0.0 0.9 0.12 1</ambient><diffuse>0.0 0.9 0.12 1</diffuse></material></visual>
+      </link>
+      <link name="decision_4_right_blue_panel">
+        <pose>12.2 -2.2 0.85 0 0 0</pose>
+        <visual name="visual"><geometry><box><size>0.08 0.75 0.75</size></box></geometry><material><ambient>0.05 0.25 1.0 1</ambient><diffuse>0.05 0.25 1.0 1</diffuse></material></visual>
+      </link>
+    </model>
+
+    <model name="goal_ball">
+      <static>false</static>
+      <pose>15.0 0 0.2 0 0 0</pose>
+      <link name="link">
+        <inertial>
+          <mass>0.15</mass>
+          <inertia>
+            <ixx>0.0016</ixx>
+            <iyy>0.0016</iyy>
+            <izz>0.0016</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry><sphere><radius>0.2</radius></sphere></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><sphere><radius>0.2</radius></sphere></geometry>
+          <material><ambient>1.0 0.72 0.05 1</ambient><diffuse>1.0 0.72 0.05 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+  </world>
+</sdf>

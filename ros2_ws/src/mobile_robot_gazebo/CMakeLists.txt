@@ -33,4 +33,9 @@ install(
     DESTINATION lib/${PROJECT_NAME}
   )
 
+install(
+    PROGRAMS exploration/detect_shape.py
+    DESTINATION lib/${PROJECT_NAME}
+  )
+
 ament_package()

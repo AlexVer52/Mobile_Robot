@@ -83,6 +83,17 @@
       </visual>
     </link>
 
+    <link name="depth_camera_link">
+      <visual>
+        <geometry>
+          <box size="0.04 0.04 0.03"/>
+        </geometry>
+        <material name="purple">
+          <color rgba="0.5 0 1 1"/>
+        </material>
+      </visual>
+    </link>
+
     <link name="imu_link"/>
 
     <link name="front_caster">
@@ -142,6 +153,12 @@
     <joint name="camera_joint" type="fixed">
       <parent link="base_link"/>
       <child link="camera_link"/>
+      <origin xyz="${block_length/2 + 0.02} 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <joint name="depth_camera_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="depth_camera_link"/>
       <origin xyz="${block_length/2 + 0.02} 0 0" rpy="0 0 0"/>
     </joint>
 
@@ -210,6 +227,7 @@
     <gazebo reference="camera_link">
       <sensor name="camera" type="camera">
         <topic>/camera/image_raw</topic>
+        <gz_frame_id>camera_link</gz_frame_id>
         <update_rate>30</update_rate>
         <camera>
           <horizontal_fov>1.047</horizontal_fov>
@@ -221,6 +239,28 @@
           <clip>
             <near>0.05</near>
             <far>20.0</far>
+          </clip>
+        </camera>
+        <always_on>true</always_on>
+        <visualize>true</visualize>
+      </sensor>
+    </gazebo>
+
+    <gazebo reference="depth_camera_link">
+      <sensor name="depth_camera" type="depth_camera">
+        <topic>/camera/depth/image_raw</topic>
+        <gz_frame_id>depth_camera_link</gz_frame_id>
+        <update_rate>30</update_rate>
+        <camera>
+          <horizontal_fov>1.047</horizontal_fov>
+          <image>
+            <width>640</width>
+            <height>480</height>
+            <format>R_FLOAT32</format>
+          </image>
+          <clip>
+            <near>0.05</near>
+            <far>8.0</far>
           </clip>
         </camera>
         <always_on>true</always_on>

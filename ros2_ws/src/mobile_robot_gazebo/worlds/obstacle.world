@@ -1,0 +1,150 @@
+<sdf version="1.10">
+  <world name="obstacle">
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"/>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+    <plugin filename="gz-sim8-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <plugin filename="gz-sim8-imu-system" name="gz::sim::systems::Imu"/>
+
+    <gravity>0 0 -9.81</gravity>
+
+    <light name="sun" type="directional">
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry><plane><normal>0 0 1</normal><size>14 14</size></plane></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><plane><normal>0 0 1</normal><size>14 14</size></plane></geometry>
+          <material>
+            <ambient>0.82 0.82 0.82 1</ambient>
+            <diffuse>0.82 0.82 0.82 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="obstacle_room_walls">
+      <static>true</static>
+      <link name="north_wall">
+        <pose>0 4 0.5 0 0 0</pose>
+        <collision name="collision"><geometry><box><size>8.0 0.12 1.0</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>8.0 0.12 1.0</size></box></geometry></visual>
+      </link>
+      <link name="south_wall">
+        <pose>0 -4 0.5 0 0 0</pose>
+        <collision name="collision"><geometry><box><size>8.0 0.12 1.0</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>8.0 0.12 1.0</size></box></geometry></visual>
+      </link>
+      <link name="east_wall">
+        <pose>4 0 0.5 0 0 0</pose>
+        <collision name="collision"><geometry><box><size>0.12 8.0 1.0</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>0.12 8.0 1.0</size></box></geometry></visual>
+      </link>
+      <link name="west_wall">
+        <pose>-4 0 0.5 0 0 0</pose>
+        <collision name="collision"><geometry><box><size>0.12 8.0 1.0</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>0.12 8.0 1.0</size></box></geometry></visual>
+      </link>
+    </model>
+
+    <model name="static_obstacles">
+      <static>true</static>
+      <link name="center_barrier">
+        <pose>0.6 0.0 0.45 0 0 0.45</pose>
+        <collision name="collision"><geometry><box><size>0.35 2.2 0.9</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>0.35 2.2 0.9</size></box></geometry></visual>
+      </link>
+      <link name="left_block">
+        <pose>-1.6 1.4 0.35 0 0 0</pose>
+        <collision name="collision"><geometry><box><size>0.8 0.8 0.7</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>0.8 0.8 0.7</size></box></geometry></visual>
+      </link>
+      <link name="right_block">
+        <pose>2.1 -1.2 0.35 0 0 0.3</pose>
+        <collision name="collision"><geometry><box><size>0.9 0.6 0.7</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>0.9 0.6 0.7</size></box></geometry></visual>
+      </link>
+      <link name="narrow_post_1">
+        <pose>-0.9 -1.6 0.4 0 0 0</pose>
+        <collision name="collision"><geometry><cylinder><radius>0.25</radius><length>0.8</length></cylinder></geometry></collision>
+        <visual name="visual"><geometry><cylinder><radius>0.25</radius><length>0.8</length></cylinder></geometry></visual>
+      </link>
+      <link name="narrow_post_2">
+        <pose>1.8 1.7 0.4 0 0 0</pose>
+        <collision name="collision"><geometry><cylinder><radius>0.25</radius><length>0.8</length></cylinder></geometry></collision>
+        <visual name="visual"><geometry><cylinder><radius>0.25</radius><length>0.8</length></cylinder></geometry></visual>
+      </link>
+    </model>
+
+    <model name="goal_ball">
+      <static>false</static>
+      <pose>3.0 2.6 0.2 0 0 0</pose>
+      <link name="link">
+        <inertial>
+          <mass>0.15</mass>
+          <inertia>
+            <ixx>0.0016</ixx>
+            <iyy>0.0016</iyy>
+            <izz>0.0016</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry><sphere><radius>0.2</radius></sphere></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><sphere><radius>0.2</radius></sphere></geometry>
+          <material><ambient>1.0 0.72 0.05 1</ambient><diffuse>1.0 0.72 0.05 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="colored_distractors">
+      <static>true</static>
+      <link name="red_box">
+        <pose>-2.8 -2.4 0.25 0 0 0.2</pose>
+        <collision name="collision">
+          <geometry><box><size>0.4 0.4 0.5</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>0.4 0.4 0.5</size></box></geometry>
+          <material><ambient>0.95 0.05 0.05 1</ambient><diffuse>0.95 0.05 0.05 1</diffuse></material>
+        </visual>
+      </link>
+
+      <link name="blue_cylinder">
+        <pose>-2.7 2.6 0.3 0 0 0</pose>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.18</radius><length>0.6</length></cylinder></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><cylinder><radius>0.18</radius><length>0.6</length></cylinder></geometry>
+          <material><ambient>0.05 0.25 1.0 1</ambient><diffuse>0.05 0.25 1.0 1</diffuse></material>
+        </visual>
+      </link>
+
+      <link name="green_box">
+        <pose>2.9 -2.6 0.3 0 0 -0.4</pose>
+        <collision name="collision">
+          <geometry><box><size>0.35 0.35 0.6</size></box></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><box><size>0.35 0.35 0.6</size></box></geometry>
+          <material><ambient>0.0 0.8 0.12 1</ambient><diffuse>0.0 0.8 0.12 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+  </world>
+</sdf>
