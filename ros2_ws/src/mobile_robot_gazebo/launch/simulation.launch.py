@@ -1,12 +1,22 @@
+import os
+
+from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch_ros.actions import Node
 from launch.substitutions import Command
 from launch_ros.substitutions import FindPackageShare
 from launch.substitutions import PathJoinSubstitution
-from launch.actions import IncludeLaunchDescription
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
+from ros_gz_bridge.actions import RosGzBridge
+from ros_gz_sim.actions import GzServer
+from launch.substitutions import LaunchConfiguration
 
 def generate_launch_description():
+    pkg_share = get_package_share_directory("mobile_robot_gazebo")
+    bridge_config_path = os.path.join(pkg_share, 'config', 'bridge.yaml')
+    world = LaunchConfiguration("world")
+
     robot_description_path = PathJoinSubstitution([
         FindPackageShare("mobile_robot_description"),
         "urdf",
@@ -23,7 +33,25 @@ def generate_launch_description():
     world_path = PathJoinSubstitution([
         FindPackageShare("mobile_robot_gazebo"),
         "worlds",
-        "empty.world",
+        world,
+    ])
+
+    slam_path = PathJoinSubstitution([
+        FindPackageShare("mobile_robot_gazebo"),
+        "config",
+        "slam.yaml",
+    ])
+
+    nav_path = PathJoinSubstitution([
+        FindPackageShare("mobile_robot_gazebo"),
+        "config",
+        "nav.yaml",
+    ])
+
+    rviz_path = PathJoinSubstitution([
+        FindPackageShare("mobile_robot_gazebo"),
+        "rviz",
+        "nav.rviz",
     ])
 
     gazebo = IncludeLaunchDescription(
@@ -36,7 +64,14 @@ def generate_launch_description():
         ]),
         launch_arguments={
             "gz_args": world_path,
+            "use_sim_time": "true",
         }.items(),
+    )
+
+    ros_gz_bridge = RosGzBridge(
+        bridge_name='ros_gz_bridge',
+        config_file=bridge_config_path,
+        use_composition='False',
     )
 
     robot_state_publisher = Node(
@@ -56,50 +91,65 @@ def generate_launch_description():
         output="screen",
     )
 
-    ## Switch to YAML file
-    #bridge = Node(
-    #    package="ros_gz_bridge",
-    #    executable="parameter_bridge",
-    #    arguments=[
-    #    "/model/mobile_robot/cmd_vel@geometry_msgs/msg/Twist@gz.msgs.Twist",
-    #    "/camera/image_raw@sensor_msgs/msg/Image@gz.msgs.Image",
-    #    "/camera/camera_info@sensor_msgs/msg/CameraInfo@gz.msgs.CameraInfo",
-    #    "/imu@sensor_msgs/msg/Imu@gz.msgs.IMU",
-    #    "/model/mobile_robot/odometry@nav_msgs/msg/Odometry@gz.msgs.Odometry",
-    #    "/scan@sensor_msgs/msg/LaserScan@gz.msgs.LaserScan",
-    #    "/model/mobile_robot/tf@tf2_msgs/msg/TFMessage@gz.msgs.Pose_V",
-    #    ],
-    #    remappings=[
-    #        ("/model/mobile_robot/tf", "/tf"),
-    #        ("/model/mobile_robot/odometry", "/odom"),
-    #    ]
-    #)
-
-    ## Add a static transform between the LiDAR and the robot basefootprint
-    lidar_tf = Node(
-        package="tf2_ros",
-        executable="static_transform_publisher",
-        arguments=[
-            "0.22", "0.05", "0.10",  # x, y, z
-            "0.0", "0.0", "0.0",  # roll, pitch, yaw
-            "mobile_robot/base_footprint",
-            "mobile_robot/base_footprint/lidar",
-        ],
+    ekf_node = Node(
+        package="robot_localization",
+        executable="ekf_node",
+        name="ekf_filter_node",
+        output="screen",
+        parameters=[os.path.join(pkg_share, 'config', 'ekf.yaml'), {'use_sim_time': True}]
     )
 
-    ##rviz_node = Node(
-    ##    package='rviz2',
-    ##    executable='rviz2',
-    ##    name='rviz2',
-    ##    output='screen',
-    ##    arguments=['-d', LaunchConfiguration('rvizconfig')],
-    ##)
+    ## Automatiser le lancement de rivz
+    rviz = Node(
+        package="rviz2",
+        executable="rviz2",
+        name="rviz2",
+        output="screen",
+        arguments=['-d', rviz_path],
+        parameters=[{"use_sim_time": True}],
+    )
+
+    ## Automatiser le lancement de SLAM
+    slam = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            PathJoinSubstitution([
+                FindPackageShare("slam_toolbox"),
+                "launch",
+                "online_async_launch.py",
+            ])
+        ]),
+        launch_arguments={
+            "slam_params_file": slam_path,
+            "use_sim_time": "true",
+        }.items(),
+    )
+
+    nav2 = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            PathJoinSubstitution([
+                FindPackageShare("nav2_bringup"),
+                "launch",
+                "navigation_launch.py",
+            ])
+        ]),
+        launch_arguments={
+            "params_file": nav_path,
+            "use_sim_time": "true",
+        }.items(),
+    )
 
     return LaunchDescription([
+        DeclareLaunchArgument(
+            "world",
+            default_value="simple_test.world",
+            description="World file from mobile_robot_gazebo/worlds",
+        ),
         gazebo,
         robot_state_publisher,
         spawn_robot,
-        #bridge,
-        lidar_tf,
-        ##rviz_node,
+        ros_gz_bridge,
+        ekf_node,
+        rviz,
+        slam,
+        nav2,
     ])

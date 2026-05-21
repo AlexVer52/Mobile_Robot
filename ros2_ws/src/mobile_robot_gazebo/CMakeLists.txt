@@ -24,8 +24,18 @@ if(BUILD_TESTING)
 endif()
 
 install(
-    DIRECTORY launch worlds
+    DIRECTORY launch worlds config maps rviz
     DESTINATION share/${PROJECT_NAME}
+  )
+
+install(
+    PROGRAMS exploration/frontier_explorer.py
+    DESTINATION lib/${PROJECT_NAME}
+  )
+
+install(
+    PROGRAMS exploration/detect_shape.py
+    DESTINATION lib/${PROJECT_NAME}
   )
 
 ament_package()
