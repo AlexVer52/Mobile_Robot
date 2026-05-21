@@ -18,3 +18,4 @@ Thumbs.db
 
 # ROS logs
 .ros/
+.codex
