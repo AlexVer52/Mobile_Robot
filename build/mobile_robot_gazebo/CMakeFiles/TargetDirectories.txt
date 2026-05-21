@@ -1,9 +1,0 @@
-/home/averot/mobile_robot/build/mobile_robot_gazebo/CMakeFiles/uninstall.dir
-/home/averot/mobile_robot/build/mobile_robot_gazebo/CMakeFiles/mobile_robot_gazebo_uninstall.dir
-/home/averot/mobile_robot/build/mobile_robot_gazebo/CMakeFiles/test.dir
-/home/averot/mobile_robot/build/mobile_robot_gazebo/CMakeFiles/edit_cache.dir
-/home/averot/mobile_robot/build/mobile_robot_gazebo/CMakeFiles/rebuild_cache.dir
-/home/averot/mobile_robot/build/mobile_robot_gazebo/CMakeFiles/list_install_components.dir
-/home/averot/mobile_robot/build/mobile_robot_gazebo/CMakeFiles/install.dir
-/home/averot/mobile_robot/build/mobile_robot_gazebo/CMakeFiles/install/local.dir
-/home/averot/mobile_robot/build/mobile_robot_gazebo/CMakeFiles/install/strip.dir

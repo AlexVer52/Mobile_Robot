@@ -1,9 +1,0 @@
-/home/averot/mobile_robot/build/mobile_robot_description/CMakeFiles/uninstall.dir
-/home/averot/mobile_robot/build/mobile_robot_description/CMakeFiles/mobile_robot_description_uninstall.dir
-/home/averot/mobile_robot/build/mobile_robot_description/CMakeFiles/test.dir
-/home/averot/mobile_robot/build/mobile_robot_description/CMakeFiles/edit_cache.dir
-/home/averot/mobile_robot/build/mobile_robot_description/CMakeFiles/rebuild_cache.dir
-/home/averot/mobile_robot/build/mobile_robot_description/CMakeFiles/list_install_components.dir
-/home/averot/mobile_robot/build/mobile_robot_description/CMakeFiles/install.dir
-/home/averot/mobile_robot/build/mobile_robot_description/CMakeFiles/install/local.dir
-/home/averot/mobile_robot/build/mobile_robot_description/CMakeFiles/install/strip.dir
