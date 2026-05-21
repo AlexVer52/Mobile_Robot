@@ -1,1 +1,0 @@
-/home/averot/mobile_robot/build/mobile_robot_gazebo/ament_cmake_core/mobile_robot_gazeboConfig-version.cmake
