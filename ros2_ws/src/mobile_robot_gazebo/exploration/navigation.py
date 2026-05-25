@@ -16,9 +16,9 @@ from nav_msgs.msg import OccupancyGrid
 import random
 from visualization_msgs.msg import Marker
 
-class DetectShape(Node):
+class Navigation(Node):
     def __init__(self):
-        super().__init__('detect_shape')
+        super().__init__('navigation')
 
         self.latest_image = None
         self.latest_depth_image = None
@@ -63,8 +63,8 @@ class DetectShape(Node):
             10
         )
 
-        self.image_publisher = self.create_publisher(Image, '/detect_shape/debug_image', 10)
-        self.marker_publisher = self.create_publisher(Marker, '/detect_shape/goal_marker', 10)
+        self.image_publisher = self.create_publisher(Image, '/navigation/debug_image', 10)
+        self.marker_publisher = self.create_publisher(Marker, '/navigation/goal_marker', 10)
 
         self.nav_client = ActionClient(self, NavigateToPose, 'navigate_to_pose')
         self.is_navigating = False

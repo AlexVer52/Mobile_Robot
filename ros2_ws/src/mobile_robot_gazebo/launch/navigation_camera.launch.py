@@ -8,14 +8,14 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 
 def generate_launch_description():
 
-    detect_shape = Node(
+    navigation = Node(
         package="mobile_robot_gazebo",
-        executable="detect_shape.py",
-        name="detect_shape",
+        executable="navigation.py",
+        name="navigation",
         output="screen",
         parameters=[{"use_sim_time": True}],
     )
 
     return LaunchDescription([
-        detect_shape
+        navigation
     ])
