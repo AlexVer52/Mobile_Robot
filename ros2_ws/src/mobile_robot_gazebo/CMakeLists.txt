@@ -34,7 +34,7 @@ install(
   )
 
 install(
-    PROGRAMS exploration/detect_shape.py
+    PROGRAMS exploration/navigation.py
     DESTINATION lib/${PROJECT_NAME}
   )
 
