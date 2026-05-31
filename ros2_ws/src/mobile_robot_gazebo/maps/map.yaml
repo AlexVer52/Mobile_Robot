@@ -1,7 +1,7 @@
-image: empty_world_test2.pgm
+image: map.pgm
 mode: trinary
 resolution: 0.050
-origin: [-0.130, -2.099, 0]
+origin: [-3.993, -3.980, 0]
 negate: 0
 occupied_thresh: 0.65
 free_thresh: 0.196
